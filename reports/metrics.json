@@ -1,0 +1,77 @@
+{
+  "data": {
+    "train": 89634,
+    "valid": 29878,
+    "test": 29878,
+    "default_rate_train": 0.067
+  },
+  "scorecard_test": {
+    "auc": 0.848,
+    "gini": 0.696,
+    "ks": 0.544,
+    "brier": 0.0509,
+    "observed_default_rate": 0.067,
+    "mean_predicted_pd": 0.0673
+  },
+  "scorecard_valid": {
+    "auc": 0.8599,
+    "gini": 0.7198,
+    "ks": 0.5614,
+    "brier": 0.05,
+    "observed_default_rate": 0.067,
+    "mean_predicted_pd": 0.067
+  },
+  "challenger_test": {
+    "auc": 0.8621,
+    "gini": 0.7242,
+    "ks": 0.5725,
+    "brier": 0.0491,
+    "observed_default_rate": 0.067,
+    "mean_predicted_pd": 0.0675
+  },
+  "challenger_best_iteration": 195,
+  "feature_selection": {
+    "iv": {
+      "revolving_utilization": 1.1251,
+      "past_due_90_plus": 0.8368,
+      "past_due_30_59": 0.7162,
+      "past_due_60_89": 0.5551,
+      "age": 0.2637,
+      "open_credit_lines": 0.0857,
+      "monthly_income": 0.0719,
+      "dependents": 0.0381,
+      "debt_ratio": 0.0183,
+      "real_estate_loans": 0.0
+    },
+    "dropped_low_iv": [
+      "debt_ratio",
+      "real_estate_loans"
+    ],
+    "dropped_correlated": []
+  },
+  "scorecard_features": [
+    "revolving_utilization",
+    "past_due_90_plus",
+    "past_due_30_59",
+    "past_due_60_89",
+    "age",
+    "open_credit_lines",
+    "monthly_income",
+    "dependents"
+  ],
+  "scaling": {
+    "pdo": 20.0,
+    "base_score": 600.0,
+    "base_odds": 50.0
+  },
+  "policy_test": {
+    "approve_max_pd": 0.05,
+    "decline_min_pd": 0.15,
+    "approve_share": 0.6851,
+    "manual_review_share": 0.2199,
+    "decline_share": 0.095,
+    "default_rate_approve": 0.0189,
+    "default_rate_decline": 0.3636,
+    "default_rate_manual_review": 0.0889
+  }
+}

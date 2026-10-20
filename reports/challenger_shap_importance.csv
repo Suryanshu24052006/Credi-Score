@@ -1,0 +1,11 @@
+,mean_abs_shap
+revolving_utilization,0.6969
+past_due_30_59,0.302
+age,0.234
+past_due_90_plus,0.2067
+open_credit_lines,0.143
+debt_ratio,0.1332
+monthly_income,0.1303
+past_due_60_89,0.1142
+real_estate_loans,0.081
+dependents,0.0216

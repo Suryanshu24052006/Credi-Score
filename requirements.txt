@@ -1,0 +1,12 @@
+numpy>=1.26
+pandas>=2.1
+scikit-learn>=1.4
+lightgbm>=4.3
+matplotlib>=3.8
+joblib>=1.3
+fastapi>=0.110
+uvicorn>=0.29
+pydantic>=2.5
+pytest>=8.0
+httpx>=0.27
+empulse==0.13.0  # has a copy of the dataset, not needed if data/cs-training.csv is there

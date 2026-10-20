@@ -1,0 +1,29 @@
+{
+  "score_psi_train_vs_test": 0.0005,
+  "score_psi_train_vs_simulated_shift": 0.1643,
+  "default_rate_simulated_shift": 0.1008,
+  "feature_psi_train_vs_test": {
+    "revolving_utilization": 0.0001,
+    "age": 0.0005,
+    "past_due_30_59": 0.0,
+    "debt_ratio": 0.0008,
+    "monthly_income": 0.0004,
+    "open_credit_lines": 0.0005,
+    "past_due_90_plus": 0.0,
+    "real_estate_loans": 0.0001,
+    "past_due_60_89": 0.0,
+    "dependents": 0.0004
+  },
+  "feature_psi_train_vs_simulated_shift": {
+    "revolving_utilization": 0.2548,
+    "age": 0.0201,
+    "past_due_30_59": 0.0109,
+    "debt_ratio": 0.0053,
+    "monthly_income": 0.0049,
+    "open_credit_lines": 0.0206,
+    "past_due_90_plus": 0.0227,
+    "real_estate_loans": 0.0066,
+    "past_due_60_89": 0.0077,
+    "dependents": 0.0023
+  }
+}

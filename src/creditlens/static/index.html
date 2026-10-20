@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CreditLens</title>
+<style>
+  :root { --ink:#1b1f24; --muted:#5c6670; --line:#d9dee3; --bg:#f6f7f8; --card:#fff;
+          --ok:#1f7a4d; --warn:#a86b00; --bad:#b3261e; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:15px/1.5 system-ui, sans-serif; color:var(--ink); background:var(--bg); }
+  main { max-width: 900px; margin: 0 auto; padding: 24px 16px; }
+  h1 { margin: 0 0 4px; font-size: 1.6rem; }
+  p.sub { margin: 0 0 20px; color: var(--muted); }
+  .grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:16px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:16px; }
+  label { display:block; font-size:.85rem; color:var(--muted); margin-top:10px; }
+  input { width:100%; padding:7px 9px; border:1px solid var(--line); border-radius:6px; font:inherit; }
+  button { margin-top:16px; width:100%; padding:10px; border:0; border-radius:6px;
+           background:var(--ink); color:#fff; font:inherit; font-weight:600; cursor:pointer; }
+  .big { font-size:2.4rem; font-weight:700; }
+  .pill { display:inline-block; padding:2px 10px; border-radius:99px; font-weight:600; color:#fff; }
+  .approve { background:var(--ok); } .manual_review { background:var(--warn); } .decline { background:var(--bad); }
+  ul { padding-left:18px; } .muted { color:var(--muted); }
+</style>
+</head>
+<body>
+<main>
+  <h1>CreditLens</h1>
+  <p class="sub">Explainable credit-risk scorecard &middot; <a href="/docs">API docs</a></p>
+  <div class="grid">
+    <form class="card" id="f">
+      <label>Revolving utilisation (0.35 = 35%)<input name="revolving_utilization" type="number" step="0.01" value="0.85" required></label>
+      <label>Age<input name="age" type="number" value="29" required></label>
+      <label>Times 30-59 days late<input name="past_due_30_59" type="number" value="2"></label>
+      <label>Times 60-89 days late<input name="past_due_60_89" type="number" value="0"></label>
+      <label>Times 90+ days late<input name="past_due_90_plus" type="number" value="0"></label>
+      <label>Debt ratio<input name="debt_ratio" type="number" step="0.01" value="0.45" required></label>
+      <label>Monthly income (blank if not reported)<input name="monthly_income" type="number" value="4200"></label>
+      <label>Open credit lines<input name="open_credit_lines" type="number" value="7" required></label>
+      <label>Real-estate loans<input name="real_estate_loans" type="number" value="0"></label>
+      <label>Dependents<input name="dependents" type="number" value="1"></label>
+      <button>Score applicant</button>
+    </form>
+    <section class="card" id="out"><p class="muted">Fill the form and press "Score applicant".</p></section>
+  </div>
+</main>
+<script>
+const form = document.getElementById("f"), out = document.getElementById("out");
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const body = {};
+  for (const [k, v] of new FormData(form)) body[k] = v === "" ? null : Number(v);
+  const res = await fetch("/score", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+  const r = await res.json();
+  if (!res.ok) { out.innerHTML = `<p style="color:var(--bad)">Error: ${JSON.stringify(r.detail)}</p>`; return; }
+  const reasons = r.reasons.map(x => `<li>${x.reason} <span class="muted">(-${x.points_lost} pts)</span></li>`).join("");
+  out.innerHTML = `
+    <div class="muted">Score</div><div class="big">${r.score}</div>
+    <p>Grade <b>${r.grade}</b> &middot; PD <b>${(r.probability_of_default * 100).toFixed(1)}%</b></p>
+    <p><span class="pill ${r.decision}">${r.decision.replace("_", " ")}</span></p>
+    <div class="muted">Top reasons points were lost</div><ul>${reasons || "<li>None</li>"}</ul>`;
+});
+</script>
+</body>
+</html>

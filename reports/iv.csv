@@ -1,0 +1,11 @@
+,iv
+revolving_utilization,1.1251
+past_due_90_plus,0.8368
+past_due_30_59,0.7162
+past_due_60_89,0.5551
+age,0.2637
+open_credit_lines,0.0857
+monthly_income,0.0719
+dependents,0.0381
+debt_ratio,0.0183
+real_estate_loans,0.0
