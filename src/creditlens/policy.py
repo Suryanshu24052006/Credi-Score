@@ -1,4 +1,5 @@
-# decision thresholds - picked by looking at reports/cutoffs_test.csv, can be changed
+# decision thresholds - fixed business settings, chosen before the test set was scored.
+# reports/cutoffs_test.csv shows the approval / default-rate trade-off if a bank wants to move them
 APPROVE_MAX_PD = 0.05
 DECLINE_MIN_PD = 0.15
 
