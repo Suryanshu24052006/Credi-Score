@@ -1,5 +1,7 @@
 # CreditLens
 
+**Live demo:** https://credi-score.onrender.com (free tier, first load can take ~50 s to wake up)
+
 Credit risk scorecard on the Kaggle "Give Me Some Credit" dataset. Predicts if a borrower will be 90+ days late in the next 2 years, converts that into a credit score, and gives approve / manual review / decline with the reasons behind it.
 
 I wanted to build it the way banks usually do it, so the main model is a WoE + logistic regression scorecard (easy to explain), and I trained LightGBM next to it to see how much accuracy I was giving up.
